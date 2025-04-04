@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <!--Nuget-->
+  <PropertyGroup>
+    <PackageId>Inception.Domain</PackageId>
+
+    <Product>1nception</Product>
+    <Title>1nception</Title>
+    <Description>1nception is a lightweight framework for building event driven systems with DDD/CQRS in mind.</Description>
+    <PackageTags>CQRS DDD ES Event store sourcing 1nception inception domain model projection</PackageTags>
+
+    <Copyright>Copyright © 1Software</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+
+    <RepositoryUrl>https://github.com/1SoftwareCompany/1nception.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/1SoftwareCompany/1nception</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+
+    <AssemblyName>One.Inception.Domain</AssemblyName>
+    <RootNamespace>One.Inception</RootNamespace>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AssemblyVersion>12.0.0</AssemblyVersion>
+  </PropertyGroup>
+</Project>
