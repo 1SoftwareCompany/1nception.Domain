@@ -6,7 +6,7 @@
 
   <!--Nuget-->
   <PropertyGroup>
-    <PackageId>Inception.Domain</PackageId>
+    <PackageId>1nception.Domain</PackageId>
 
     <Product>1nception</Product>
     <Title>1nception</Title>
