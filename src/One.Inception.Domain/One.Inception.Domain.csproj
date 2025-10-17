@@ -27,4 +27,7 @@
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyVersion>13.0.0</AssemblyVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="NuGetizer" Version="1.4.4" />
+  </ItemGroup>
 </Project>

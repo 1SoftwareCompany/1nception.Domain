@@ -15,4 +15,8 @@
     <ProjectReference Include="..\One.Inception.Domain\One.Inception.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="NuGetizer" Version="1.4.4" />
+  </ItemGroup>
+
 </Project>
