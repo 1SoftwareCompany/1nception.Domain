@@ -17,7 +17,7 @@ public interface IScheduledMessage : IMessage
     /// <summary>
     /// The date when this message will be published.
     /// </summary>
-    DateTime PublishAt { get; }
+    DateTimeOffset PublishAt { get; }
 }
 
 public interface ISagaTimeoutHandler<in T> where T : IScheduledMessage
@@ -36,7 +36,7 @@ public abstract class Saga : ISaga
         this.timeoutRequestPublisher = timeoutRequestPublisher ?? throw new ArgumentNullException(nameof(timeoutRequestPublisher));
     }
 
-    public Task<bool> RequestTimeout<T>(T timeoutMessage) where T : IScheduledMessage
+    public Task<bool> RequestTimeoutAsync<T>(T timeoutMessage) where T : IScheduledMessage
     {
         return timeoutRequestPublisher.PublishAsync(timeoutMessage, timeoutMessage.PublishAt);
     }

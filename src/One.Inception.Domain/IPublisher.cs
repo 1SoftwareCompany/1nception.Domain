@@ -20,7 +20,7 @@ public interface IPublisher<in TMessage> where TMessage : IMessage
     /// <param name="message">The message.</param>
     /// <param name="publishAt">The specific point in time when the message will be published.</param>
     /// <returns>Returns true if sending the message was successful.</returns>
-    Task<bool> PublishAsync(TMessage message, DateTime publishAt, Dictionary<string, string> messageHeaders = null);
+    Task<bool> PublishAsync(TMessage message, DateTimeOffset publishAt, Dictionary<string, string> messageHeaders = null);
 
     /// <summary>
     /// Publishes the specified message.
