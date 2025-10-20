@@ -27,12 +27,13 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '10.x'
-        includePreviewVersions: false
+        includePreviewVersions: true
     - task: DotNetCoreCLI@2
       name: test_mspec
       inputs:
-        command: test
+        command: 'test'
         projects: '**/*Tests.csproj'
+        arguments: '--framework net9.0'
 
   
 
