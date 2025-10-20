@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="NuGetizer" Version="1.4.4" />
+    <PackageReference Update="NuGetizer" Version="1.4.5" />
+    <PackageReference Update="ThisAssembly.Git" Version="2.1.2" />
   </ItemGroup>
 
 </Project>

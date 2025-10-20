@@ -28,6 +28,7 @@
     <AssemblyVersion>13.0.0</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Update="NuGetizer" Version="1.4.4" />
+    <PackageReference Update="NuGetizer" Version="1.4.5" />
+    <PackageReference Update="ThisAssembly.Git" Version="2.1.2" />
   </ItemGroup>
 </Project>
