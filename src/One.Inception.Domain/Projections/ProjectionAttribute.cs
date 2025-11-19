@@ -7,16 +7,35 @@ namespace One.Inception.Projections;
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
 public class ProjectionAttribute : Attribute
 {
-    public ProjectionAttribute(ProjectionEventsPersistenceSetting persistence, ProjectionReplaySetting order)
+    public ProjectionAttribute(ProjectionEventsPersistenceSetting persistence, ProjectionReplaySetting order, string fromIsoDate = null)
     {
-
         Persistence = persistence;
         Order = order;
+        Timestamp = TryGetFormattedDate(fromIsoDate);
     }
 
     public ProjectionEventsPersistenceSetting Persistence { get; }
 
     public ProjectionReplaySetting Order { get; }
+
+    /// <summary>
+    /// This timestamp will be used for replay purposes. You can always override this in the inception dashboard, but it will be prefilled.
+    /// The initial version of the projection will become live using this option.
+    /// </summary>
+    public DateTimeOffset? Timestamp { get; }
+
+
+    DateTimeOffset? TryGetFormattedDate(string fromIsoDate)
+    {
+        if (string.IsNullOrEmpty(fromIsoDate))
+            return null;
+
+        bool canParse = DateTimeOffset.TryParse(fromIsoDate, out var result);
+        if (canParse == false)
+            throw new ArgumentException($"The date {fromIsoDate} is not in correct iso format");
+
+        return result;
+    }
 }
 
 [Flags]
