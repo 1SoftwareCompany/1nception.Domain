@@ -7,7 +7,7 @@ namespace One.Inception;
 /// When we have a workflow which involves several aggregates it is recommended to have the whole process described 
 /// in a single place such as Saga/ProcessManager.
 /// </summary>
-public interface ISaga : IMessageHandler { }
+public interface IProcessManager : IMessageHandler { }
 
 /// <summary>
 /// Message which will be published in the future.
@@ -20,17 +20,17 @@ public interface IScheduledMessage : IMessage
     DateTimeOffset PublishAt { get; }
 }
 
-public interface ISagaTimeoutHandle<in T> where T : IScheduledMessage
+public interface IProcessManagerTimeoutHandle<in T> where T : IScheduledMessage
 {
-    Task HandleAsync(T sagaTimeout);
+    Task HandleAsync(T processManagerTimeout);
 }
 
-public abstract class Saga : ISaga
+public abstract class ProcessManager : IProcessManager
 {
     protected readonly IPublisher<ICommand> commandPublisher;
     protected readonly IPublisher<IScheduledMessage> timeoutRequestPublisher;
 
-    public Saga(IPublisher<ICommand> commandPublisher, IPublisher<IScheduledMessage> timeoutRequestPublisher)
+    public ProcessManager(IPublisher<ICommand> commandPublisher, IPublisher<IScheduledMessage> timeoutRequestPublisher)
     {
         this.commandPublisher = commandPublisher ?? throw new ArgumentNullException(nameof(commandPublisher));
         this.timeoutRequestPublisher = timeoutRequestPublisher ?? throw new ArgumentNullException(nameof(timeoutRequestPublisher));
