@@ -20,7 +20,7 @@ public interface IScheduledMessage : IMessage
     DateTimeOffset PublishAt { get; }
 }
 
-public interface ISagaTimeoutHandler<in T> where T : IScheduledMessage
+public interface ISagaTimeoutHandle<in T> where T : IScheduledMessage
 {
     Task HandleAsync(T sagaTimeout);
 }

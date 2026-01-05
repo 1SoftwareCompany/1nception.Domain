@@ -2,7 +2,7 @@
 
 namespace One.Inception;
 
-public interface ICommandHandler<in T>
+public interface ICommandHandle<in T>
     where T : ICommand
 {
     Task HandleAsync(T command);
