@@ -1,15 +1,14 @@
 ﻿namespace One.Inception;
 
-public interface ITracer
+public interface IMessageTracer
 {
     void Record(string incomingMessageId, string correlationId = null);
-    TraceInfo GenerateTrace(string messageId = null);
-    TraceInfo GetTrace();
+    MessageTraceInfo CreateTrace(string messageId = null);
 }
 
-public record class TraceInfo
+public record class MessageTraceInfo
 {
-    public TraceInfo(string messageId, string causationId, string correlationId)
+    public MessageTraceInfo(string messageId, string causationId, string correlationId)
     {
         MessageId = messageId;
         CausationId = causationId;
@@ -20,3 +19,4 @@ public record class TraceInfo
     public string CausationId { get; private set; }
     public string CorrelationId { get; private set; }
 }
+
