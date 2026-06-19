@@ -1,9 +1,16 @@
-﻿namespace One.Inception;
+﻿using System.Threading.Tasks;
+
+namespace One.Inception;
 
 public interface IMessageTracer
 {
     void Record(string incomingMessageId, string correlationId = null);
     MessageTraceInfo CreateTrace(string messageId = null);
+}
+
+public interface IMessageTraceWriter
+{
+    Task WriteAsync(MessageTraceInfo messageTraceInfo);
 }
 
 public record class MessageTraceInfo
