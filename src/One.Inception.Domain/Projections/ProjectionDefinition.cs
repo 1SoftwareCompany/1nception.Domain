@@ -18,6 +18,7 @@ public class SubscriptionIdResolver
     public Func<IEvent, IBlobId> IdResolver { get; private set; }
 }
 
+[Projection(ProjectionEventsPersistenceSetting.Persistent, ProjectionReplaySetting.Unordered)]
 public abstract class ProjectionDefinition<TState, TId> : IProjectionDefinition, IProjection
     where TState : new()
     where TId : IBlobId
@@ -31,7 +32,7 @@ public abstract class ProjectionDefinition<TState, TId> : IProjectionDefinition,
 
     public ProjectionDefinition()
     {
-        ((IProjectionDefinition)this).State = new TState();
+        ((IHaveState)this).State = new TState();
         subscriptionResolvers = new Dictionary<Type, List<Func<IEvent, IBlobId>>>();
     }
 
@@ -55,15 +56,17 @@ public abstract class ProjectionDefinition<TState, TId> : IProjectionDefinition,
         }
     }
 
-    async Task IProjectionDefinition.ApplyAsync(IEvent @event)
+    async Task IHaveState.ApplyAsync(IEvent @event)
     {
         await ((dynamic)this).HandleAsync((dynamic)@event).ConfigureAwait(false);
     }
 
-    void IHaveState.InitializeState(IBlobId projectionId, object state)
+    Task IHaveState.InitializeStateAsync(IBlobId projectionId, object state)
     {
         ((IHaveState)this).Id = projectionId;
         ((IHaveState)this).State = state ?? new TState();
+
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -149,10 +152,5 @@ public abstract class ProjectionDefinition<TState, TId> : IProjectionDefinition,
         where TEvent : IEvent
     {
         return Subscribe(projectionId, null);
-    }
-
-    public virtual Task OnReplayCompletedAsync()
-    {
-        return Task.CompletedTask;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace One.Inception;
 
-public interface IPublicEventHandler<in T>
-    where T : IPublicEvent
+public interface IEventHandle<in T>
+    where T : IEvent
 {
     Task HandleAsync(T @event);
 }

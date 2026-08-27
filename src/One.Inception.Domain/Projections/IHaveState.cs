@@ -1,4 +1,6 @@
-﻿namespace One.Inception.Projections;
+﻿using System.Threading.Tasks;
+
+namespace One.Inception.Projections;
 
 public interface IHaveState
 {
@@ -17,5 +19,12 @@ public interface IHaveState
     /// </summary>
     /// <param name="id">The ID of the specific projection instance.</param>
     /// <param name="state">The state/snapshot of the specific projection instance.</param>
-    void InitializeState(IBlobId id, object state);
+    Task InitializeStateAsync(IBlobId id, object state);
+
+    /// <summary>
+    /// GET build the state of a projection
+    /// </summary>
+    /// <param name="event"></param>
+    /// <returns></returns>
+    Task ApplyAsync(IEvent @event) => Task.CompletedTask;
 }
