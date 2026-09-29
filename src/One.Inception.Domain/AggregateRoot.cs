@@ -52,11 +52,15 @@ public class AggregateRoot<TState> : IAggregateRoot
         var handler = handlers.GetEventHandler(@event, out IEvent realEvent);
         handler(realEvent);
         uncommittedEvents.Add(@event);
+
+        @event.GetOrCreateMessageId();
     }
 
     internal protected void Apply(IPublicEvent @event)
     {
         uncommittedPublicEvents.Add(@event);
+
+        @event.GetOrCreateMessageId();
     }
 
     IEnumerable<IEvent> IAmEventSourced.UncommittedEvents { get { return uncommittedEvents.AsReadOnly(); } }
