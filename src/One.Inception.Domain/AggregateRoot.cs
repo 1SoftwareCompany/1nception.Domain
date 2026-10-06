@@ -116,24 +116,24 @@ public sealed class EventHandlerRegistrations // internal?
         }
     }
 
-    private Action<IEvent> FindStateHandler(Type candidate)
+    private Action<IEvent> FindStateHandler(Type candidate, Dictionary<Type, Action<IEvent>> source)
     {
         if (candidate is null || typeof(IEvent).IsAssignableFrom(candidate) == false)
             return null;
 
-        aggregateRootHandlers.TryGetValue(candidate, out Action<IEvent> stateHandler);
+        source.TryGetValue(candidate, out Action<IEvent> stateHandler);
 
         if (stateHandler is not null)
             return stateHandler;
 
         foreach (var @interface in candidate.GetInterfaces())
         {
-            aggregateRootHandlers.TryGetValue(@interface, out stateHandler);
+            source.TryGetValue(@interface, out stateHandler);
             if (stateHandler is not null)
                 return stateHandler;
         }
 
-        return FindStateHandler(candidate.BaseType);
+        return FindStateHandler(candidate.BaseType, source);
     }
 
     public Action<IEvent> GetEventHandler(IEvent @event, out IEvent realEvent)
@@ -147,7 +147,7 @@ public sealed class EventHandlerRegistrations // internal?
 
         if (entityEvent is null)
         {
-            stateHandler = FindStateHandler(realEventType);
+            stateHandler = FindStateHandler(realEventType, aggregateRootHandlers);
         }
         else
         {
@@ -156,7 +156,7 @@ public sealed class EventHandlerRegistrations // internal?
             Dictionary<Type, Action<IEvent>> entityRegistration;
             if (entityHandlers.TryGetValue(entityEvent.EntityId, out entityRegistration))
             {
-                entityRegistration.TryGetValue(realEventType, out stateHandler);
+                stateHandler = FindStateHandler(realEventType, entityRegistration);
             }
         }
 
