@@ -5,6 +5,6 @@ namespace One.Inception;
 public interface IMessage
 {
     DateTimeOffset Timestamp { get; }
-
-    string MessageId => MessageIds.Get(this);
+    
+    sealed string MessageId => MessageIds.Get(this); // sealed, so we are not allowing overriding of this propoerty
 }
