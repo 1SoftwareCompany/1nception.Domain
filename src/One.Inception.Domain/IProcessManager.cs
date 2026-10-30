@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace One.Inception;
@@ -22,7 +23,7 @@ public interface IScheduledMessage : IMessage
 
 public interface IProcessManagerTimeoutHandle<in T> where T : IScheduledMessage
 {
-    Task HandleAsync(T processManagerTimeout);
+    Task HandleAsync(T processManagerTimeout, CancellationToken cancellationToken);
 }
 
 public abstract class ProcessManager : IProcessManager

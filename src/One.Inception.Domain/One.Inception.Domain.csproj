@@ -25,7 +25,7 @@
     <RootNamespace>One.Inception</RootNamespace>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <AssemblyVersion>13.0.0</AssemblyVersion>
+    <AssemblyVersion>14.0.0</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="NuGetizer" Version="1.4.5" />

@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace One.Inception;
 
 public interface IPublicEventHandle<in T>
     where T : IPublicEvent
 {
-    Task HandleAsync(T @event);
+    Task HandleAsync(T @event, CancellationToken cancellationToken);
 }

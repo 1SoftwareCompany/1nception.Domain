@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace One.Inception;
 
 public interface ICommandHandle<in T>
     where T : ICommand
 {
-    Task HandleAsync(T command);
+    Task HandleAsync(T command, CancellationToken cancellationToken);
 }
