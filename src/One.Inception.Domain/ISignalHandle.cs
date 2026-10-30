@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace One.Inception;
 
 public interface ISignalHandle<in T>
     where T : ISignal
 {
-    Task HandleAsync(T signal);
+    Task HandleAsync(T signal, CancellationToken cancellationToken);
 }

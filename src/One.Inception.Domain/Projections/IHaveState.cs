@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace One.Inception.Projections;
 
@@ -26,5 +27,5 @@ public interface IHaveState
     /// </summary>
     /// <param name="event"></param>
     /// <returns></returns>
-    Task ApplyAsync(IEvent @event) => Task.CompletedTask;
+    Task ApplyAsync(IEvent @event, CancellationToken cancellationToken = default) => Task.CompletedTask;
 }

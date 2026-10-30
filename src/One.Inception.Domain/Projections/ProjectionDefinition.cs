@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace One.Inception.Projections;
@@ -56,9 +57,10 @@ public abstract class ProjectionDefinition<TState, TId> : IProjectionDefinition,
         }
     }
 
-    async Task IHaveState.ApplyAsync(IEvent @event)
+    async Task IHaveState.ApplyAsync(IEvent @event, CancellationToken cancellationToken)
     {
-        await ((dynamic)this).HandleAsync((dynamic)@event).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+        await ((dynamic)this).HandleAsync((dynamic)@event, cancellationToken).ConfigureAwait(false);
     }
 
     Task IHaveState.InitializeStateAsync(IBlobId projectionId, object state)
