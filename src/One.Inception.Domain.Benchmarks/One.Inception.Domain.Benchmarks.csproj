@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="NuGetizer" Version="1.4.5" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="11.0.100" />
+    <PackageReference Update="NuGetizer" Version="1.5.1" />
     <PackageReference Update="ThisAssembly.Git" Version="2.1.6" />
   </ItemGroup>
 
